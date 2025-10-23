@@ -64,6 +64,7 @@ class ProductsController extends Controller
             'price' => $request->price,
             'image' => $request->image,
             'category_id' => $request->category_id,
+            'is_available' => $request->is_available,
         ]);
         return response()->json([
             'status' => true,
@@ -108,6 +109,7 @@ class ProductsController extends Controller
             'price' => $request->price,
             'image' => $request->image,
             'category_id' => $request->category_id,
+            'is_available' => $request->is_available,
         ]);
         return response()->json([
             'status' => true,
