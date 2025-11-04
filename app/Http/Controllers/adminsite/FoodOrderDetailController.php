@@ -11,7 +11,7 @@ class FoodOrderDetailController extends Controller
 {
     public function getAllFoodOrderDetails()
     {
-        $data = Orders::with(['food'])->get();
+        $data = Orders::with(['food.product'])->get();
         // return $data;
         return response()->json([
             'status' => true,
