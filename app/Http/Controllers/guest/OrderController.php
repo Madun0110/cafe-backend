@@ -22,10 +22,9 @@ class OrderController extends Controller
         ],[
             'table' => 'required',
             'products' => 'required',
-            'products.*.product_id' => 'required|exists:products,id',
+            'products.*.id' => 'required|exists:products,id',
             'products.*.quantity' => 'required|integer',
             'products.*.price' => 'required|numeric',
-            'products.*.total' => 'required|numeric',
             'total' => 'required',
             'payment_method' => 'required'
         ]);
@@ -43,22 +42,22 @@ class OrderController extends Controller
         ]);
 
         foreach ($request->products as $product) {
-            $find = Products::find($product['product_id']);
+            $find = Products::find($product['id']);
             if($find->category_id == 1){
                 FoodOrderDetails::create([
                     'order_id' => $order->id,
-                    'product_id' => $product['product_id'],
+                    'product_id' => $product['id'],
                     'quantity' => $product['quantity'],
                     'price' => $product['price'],
-                    'total' => $product['total']
+                    'total' => $product['price'] * $product['quantity']
                 ]);
             }else if($find->category_id == 2){
                 DrinkOrderDetails::create([
                     'order_id' => $order->id,
-                    'product_id' => $product['product_id'],
+                    'product_id' => $product['id'],
                     'quantity' => $product['quantity'],
                     'price' => $product['price'],
-                    'total' => $product['total']
+                    'total' => $product['price'] * $product['quantity']
                 ]);
             }
         }
