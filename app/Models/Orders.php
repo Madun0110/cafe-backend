@@ -20,4 +20,14 @@ class Orders extends Model
         'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
 
+    public function food()
+    {
+        return $this->hasMany(FoodOrderDetails::class, 'order_id' , 'id');
+    }
+
+    public function drink()
+    {
+        return $this->hasMany(DrinkOrderDetails::class, 'order_id' , 'id');
+    }
+
 }
