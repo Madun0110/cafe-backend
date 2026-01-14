@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers\guest;
 
-<<<<<<< HEAD
 use App\Http\Controllers\Controller;
-=======
->>>>>>> 4cc37ca3044044fe7495c893dd27c9b0dc94a62d
 use App\Models\Orders;
 use App\Models\Products;
 use App\Models\Transactions;
 use Illuminate\Http\Request;
-<<<<<<< HEAD
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use OpenApi\Attributes as OA;
@@ -253,74 +249,5 @@ class OrderController extends Controller
                 'data'    => $order
             ], 201);
         });
-=======
-use App\Models\FoodOrderDetails;
-use App\Models\DrinkOrderDetails;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
-
-class OrderController extends Controller
-{
-    public function orderProducts(Request $request){
-        $validator = Validator::make([
-            'table' => $request->table,
-            'products' => $request->products,
-            'total' => $request->total,
-            'payment_method' => $request->payment_method
-        ],[
-            'table' => 'required',
-            'products' => 'required',
-            'products.*.id' => 'required|exists:products,id',
-            'products.*.quantity' => 'required|integer',
-            'products.*.price' => 'required|numeric',
-            'total' => 'required',
-            'payment_method' => 'required'
-        ]);
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'validation error',
-                'data' => $validator->errors()
-            ], 422);
-        }
-
-        $order = Orders::create([
-            'table' => $request->table,
-            'total' => $request->total
-        ]);
-
-        foreach ($request->products as $product) {
-            $find = Products::find($product['id']);
-            if($find->category_id == 1){
-                FoodOrderDetails::create([
-                    'order_id' => $order->id,
-                    'product_id' => $product['id'],
-                    'quantity' => $product['quantity'],
-                    'price' => $product['price'],
-                    'total' => $product['price'] * $product['quantity']
-                ]);
-            }else if($find->category_id == 2){
-                DrinkOrderDetails::create([
-                    'order_id' => $order->id,
-                    'product_id' => $product['id'],
-                    'quantity' => $product['quantity'],
-                    'price' => $product['price'],
-                    'total' => $product['price'] * $product['quantity']
-                ]);
-            }
-        }
-
-        $transactions = Transactions::create([
-            'order_id' => $order->id,
-            'payment_method' => $request->payment_method,
-            'total' => $request->total
-        ]);
-
-        return response()->json([
-            'status' => true,
-            'message' => 'success',
-            'data' => $transactions
-        ],200);
->>>>>>> 4cc37ca3044044fe7495c893dd27c9b0dc94a62d
     }
 }

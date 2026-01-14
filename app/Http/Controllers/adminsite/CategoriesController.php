@@ -6,7 +6,6 @@ use App\Models\Categories;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
-<<<<<<< HEAD
 use Illuminate\Validation\Rule;
 use OpenApi\Attributes as OA;
 
@@ -283,7 +282,7 @@ class CategoriesController extends Controller
         summary: "Hapus kategori",
         description: "Menghapus kategori berdasarkan ID",
         tags: ["Admin Categories"],
-        security: [["bearerAuth" => []]],   
+        security: [["bearerAuth" => []]],
         parameters: [
             new OA\Parameter(
                 name: "id",
@@ -316,109 +315,5 @@ class CategoriesController extends Controller
             'message' => 'Category deleted',
             'data'    => null,
         ], 200);
-=======
-
-class CategoriesController extends Controller
-{
-    public function getAllCategories()
-    {
-        $data = Categories::all();
-        return response()->json([
-            'status' => true,
-            'message' => 'success',
-            'data' => $data
-        ]);
-    }
-
-    public function singleCategory($id)
-    {
-        $data = Categories::find($id);
-        if (!$data) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Data not found',
-                'data' => null
-            ], 404);
-        }
-        return response()->json([
-            'status' => true,
-            'message' => 'success',
-            'data' => $data
-        ]);
-    }
-
-    public function createCategory(Request $request)
-    {
-        $validator = Validator::make([
-            'name' => $request->name,
-        ], [
-            'name' => 'required',
-        ]);
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'validation error',
-                'data' => $validator->errors()
-            ], 422);
-        }
-        $data = Categories::create([
-            'name' => $request->name
-        ]);
-        return response()->json([
-            'status' => true,
-            'message' => 'success',
-            'data' => $data
-        ], 201);
-    }
-
-    public function updateCategory(Request $request, $id)
-    {
-        $validator = Validator::make([
-            'name' => $request->name,
-        ],[
-            'name' => 'required',
-        ]);
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'validation error',
-                'data' => $validator->errors()
-            ], 422);
-        }
-        $data = Categories::find($id);
-        if (!$data) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Data not found',
-                'data' => null
-            ], 404);
-        }
-        $data->update([
-            'name' => $request->name
-        ]);
-        return response()->json([
-            'status' => true,
-            'message' => 'success',
-            'data' => $data
-        ],200);
-    }
-
-    public function deleteCategory($id)
-    {
-        $data = Categories::find($id);
-        if (!$data) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Data not found',
-                'data' => null
-            ], 404);
-        }
-        $data->delete();
-        return response()->json([
-            'status' => true,
-            'message' => 'success',
-            'data' => null
-        ],200);
->>>>>>> 4cc37ca3044044fe7495c893dd27c9b0dc94a62d
     }
 }

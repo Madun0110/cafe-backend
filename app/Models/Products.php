@@ -3,18 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-<<<<<<< HEAD
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Products extends Model
 {
     use HasFactory;
 
-=======
-
-class Products extends Model
-{
->>>>>>> 4cc37ca3044044fe7495c893dd27c9b0dc94a62d
     protected $table = 'products';
 
     protected $fillable = [
@@ -23,15 +17,11 @@ class Products extends Model
         'description',
         'price',
         'is_available',
-<<<<<<< HEAD
         'image',
-=======
->>>>>>> 4cc37ca3044044fe7495c893dd27c9b0dc94a62d
     ];
 
     protected $casts = [
         'category_id' => 'integer',
-<<<<<<< HEAD
         'name'        => 'string',
         'description' => 'string',
         'price'       => 'float',
@@ -61,18 +51,5 @@ class Products extends Model
         }
 
         return asset('storage/' . $this->image);
-=======
-        'name' => 'string',
-        'description' => 'string',
-        'is_available' => 'boolean',
-        'price' => 'float',
-        'created_at' => 'datetime:Y-m-d H:i:s',
-        'updated_at' => 'datetime:Y-m-d H:i:s',
-    ];
-
-    public function category()
-    {
-        return $this->belongsTo(Categories::class);
->>>>>>> 4cc37ca3044044fe7495c893dd27c9b0dc94a62d
     }
 }

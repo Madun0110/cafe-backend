@@ -43,14 +43,9 @@ return [
             'root' => storage_path('app/public'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
-<<<<<<< HEAD
             'serve' => true,
             // 'throw' => false,
             // 'report' => false,
-=======
-            'throw' => false,
-            'report' => false,
->>>>>>> 4cc37ca3044044fe7495c893dd27c9b0dc94a62d
         ],
 
         's3' => [
