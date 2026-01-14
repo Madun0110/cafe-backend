@@ -13,7 +13,10 @@ return [
     | a conventional file to locate the various service credentials.
     |
     */
+<<<<<<< HEAD
     
+=======
+>>>>>>> 4cc37ca3044044fe7495c893dd27c9b0dc94a62d
 
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),

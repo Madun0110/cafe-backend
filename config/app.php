@@ -15,9 +15,12 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+<<<<<<< HEAD
     'allowed_origins' => explode(',', env('CORS_ALLOWED_ORIGINS', '')),
 
 
+=======
+>>>>>>> 4cc37ca3044044fe7495c893dd27c9b0dc94a62d
     /*
     |--------------------------------------------------------------------------
     | Application Environment

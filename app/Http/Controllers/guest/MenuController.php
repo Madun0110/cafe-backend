@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\guest;
 
+<<<<<<< HEAD
 use App\Http\Controllers\Controller;
 use App\Models\Products;
 use OpenApi\Attributes as OA;
@@ -146,5 +147,25 @@ class MenuController extends Controller
                 'error'   => $e->getMessage(),
             ], 500);
         }
+=======
+use App\Models\Products;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+class MenuController extends Controller
+{
+    public function getProducts(Request $request)
+    {
+        $products = Products::where('is_available', true);
+        if ($request->filled('category_id')) {
+            $products->where('category_id', $request->category_id);
+        }
+        $products = $products->get();
+        return response()->json([
+            'status' => true,
+            'message' => 'success',
+            'data' => $products
+        ], 200);
+>>>>>>> 4cc37ca3044044fe7495c893dd27c9b0dc94a62d
     }
 }
